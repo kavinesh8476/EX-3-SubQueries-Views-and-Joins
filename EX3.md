@@ -66,48 +66,60 @@ INSERT INTO DEPT (DEPTNO, DNAME, LOC) VALUES (40, 'OPERATIONS', 'BOSTON');
 ```
 
 ### Q1) List the name of the employees whose salary is greater than that of employee with empno 7566.
-
-
 ### QUERY:
-
-
+```
+SELECT ename FROM em WHERE sal > (SELECT sal FROM em WHERE empno = 7566);
+```
 ### OUTPUT:
+![image](https://github.com/BharathCSEIOT/EX-3-SubQueries-Views-and-Joins/assets/122793480/021989a9-8487-4458-904b-083317b0c32c)
 
 ### Q2) List the ename,job,sal of the employee who get minimum salary in the company.
 
 ### QUERY:
-
-
+```
+SELECT ename,job,sal FROM em WHERE sal = (SELECT MIN(sal) FROM em);
+```
 ### OUTPUT:
+![image](https://github.com/BharathCSEIOT/EX-3-SubQueries-Views-and-Joins/assets/122793480/7466a1bd-911b-4f11-a337-0f9e45075cb1)
 
 ### Q3) List ename, job of the employees who work in deptno 10 and his/her job is any one of the job in the department ‘SALES’.
 
 ### QUERY:
-
-
+```
+SELECT ename,job FROM em WHERE deptno = 10 AND job IN (SELECT job FROM emp WHERE job = 'sales');
+```
 ### OUTPUT:
 
+![image](https://github.com/BharathCSEIOT/EX-3-SubQueries-Views-and-Joins/assets/122793480/0ec2f091-3c0b-4816-976c-6068ea31c82c)
 
 ### Q4) Create a view empv5 (for the table emp) that contains empno, ename, job of the employees who work in dept 10.
 
 ### QUERY:
-
-
+```
+CREATE VIEW emv5 AS SELECT empno,ename,job from em WHERE deptno = 10;
+SELECT ename FROM emv5;
+```
 ### OUTPUT:
+![image](https://github.com/BharathCSEIOT/EX-3-SubQueries-Views-and-Joins/assets/122793480/6020cfcb-9f24-432d-89ec-b5bc6192fad9)
 
 ### Q5) Create a view with column aliases empv30 that contains empno, ename, sal of the employees who work in dept 30. Also display the contents of the view.
 
 ### QUERY:
-
-
+```
+CREATE VIEW emv30 AS SELECT empno AS "Employee Number",ename AS "Employee Nmae",sal AS "Salary" from em WHERE deptno = 30;
+SELECT * FROM emv30;
+```
 ### OUTPUT:
+![image](https://github.com/BharathCSEIOT/EX-3-SubQueries-Views-and-Joins/assets/122793480/0b7321b1-2884-4c43-a984-1599505e5823)
 
 ### Q6) Update the view empv5 by increasing 10% salary of the employees who work as ‘CLERK’. Also confirm the modifications in emp table
 
 ### QUERY:
-
-
+```
+UPDATE emv5 SET sal = al * 1.1 WHERE job = 'CLERK';
+```
 ### OUTPUT:
+![image](https://github.com/BharathCSEIOT/EX-3-SubQueries-Views-and-Joins/assets/122793480/d419d24e-1811-4e29-9aa3-513508d569ad)
 
 ## Create a Customer1 Table
 ```sql
@@ -140,28 +152,49 @@ INSERT INTO Salesman1 (salesman_id, name, city, commission) VALUES(5003, 'Lauson
 ### Q7) Write a SQL query to find the salesperson and customer who reside in the same city. Return Salesman, cust_name and city.
 
 ### QUERY:
-
-
+```
+SELECT salesman1.name AS "Salesman",customer1.cust_name AS "Customer Name",sales1.city AS "City" from salesman1 INNER JOIN customer1 ON salesman1.city = customer.city;
+```
 ### OUTPUT:
+![image](https://github.com/BharathCSEIOT/EX-3-SubQueries-Views-and-Joins/assets/122793480/b9bdaeea-e934-4d7f-b03b-c27972acc306)
 
 ### Q8) Write a SQL query to find salespeople who received commissions of more than 13 percent from the company. Return Customer Name, customer city, Salesman, commission.
 
 
 ### QUERY:
-
-
+```
+SELECT customer1.cust_name AS "Customer Name",customer1.city AS "Customer City",salesman1.name AS "Salesman",salesman1.commission AS "Commission" FROM salesman1 INNER JOIN customer1 ON salesman.salesman_id = customer1.salesman_id WHERE salesman1.commission  > 0.13;
+```
 ### OUTPUT:
+![image](https://github.com/BharathCSEIOT/EX-3-SubQueries-Views-and-Joins/assets/122793480/a5174711-c5d0-4fa1-9de1-4b11db3b8955)
 
 ### Q9) Perform Natural join on both tables
 
 ### QUERY:
-
-
+```
+SELECT customer1.cust_name AS "Customer Name",customer1.city AS "Customer City",salesman1.name AS "Salesman",salesman1.commission AS "Commission" FROM salesman1 INNER JOIN customer1 ON salesman.salesman_id = customer1.salesman_id WHERE salesman1.commission  > 0.13;
+```
 ### OUTPUT:
+![image](https://github.com/BharathCSEIOT/EX-3-SubQueries-Views-and-Joins/assets/122793480/a723a795-d562-440a-9fea-d9c2b36deab2)
 
 ### Q10) Perform Left and right join on both tables
 
 ### QUERY:
-
-
+### LEFT JOIN:
+```
+SELECT * FROM salesman1 LEFT JOIN customer1 ON salesman1.salesman_id = customer1.salesman_id;
+```
 ### OUTPUT:
+![image](https://github.com/BharathCSEIOT/EX-3-SubQueries-Views-and-Joins/assets/122793480/fa1b3bea-60f9-418d-bf75-25164272d9fb)
+
+### RIGHT JOIN:
+```
+SELECT * FROM salesman1 RIGHT JOIN customer1 ON salesman1.salesman_id = customer1.salesman_id;
+```
+### OUTPUT:
+![image](https://github.com/BharathCSEIOT/EX-3-SubQueries-Views-and-Joins/assets/122793480/d41b4e6c-9d8f-4ed2-b8d3-8c0554cb72ae)
+
+### Developed by:Kavinesh M
+### Register no:212222230064
+### RESULT:
+Hence successfully created SubQueries,Views and Joins.
